@@ -8,6 +8,7 @@
 }
 
 #logo{
+    text-decoration: none;
     font-size: 24px;
     font-weight: bold;
     color: rgb(41, 32, 139);

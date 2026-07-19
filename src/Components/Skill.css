@@ -1,0 +1,12 @@
+#skill{
+    background-color: #afeaffa8;
+    padding: 20px;
+}
+
+#skillList{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}

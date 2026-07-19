@@ -1,0 +1,19 @@
+#inptText{
+    margin: 10px;
+    width: 200px;
+    border: 0;
+    background-color: #80808042;
+    border-radius: 6px;
+    height: 20px;
+    padding: 5px;
+    color: black;
+}
+
+#tooltipBtn{
+    width: 200px;
+}
+
+#tooltip{
+    width:200px;
+    
+}
