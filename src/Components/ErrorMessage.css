@@ -1,0 +1,50 @@
+/* ── Error Message ── */
+.error-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 3rem 2rem;
+    margin: 2rem auto;
+    max-width: 420px;
+    width: 100%;
+    background: #fff5f5;
+    border: 1px solid rgba(220, 53, 69, 0.2);
+    border-radius: var(--radius-lg);
+    text-align: center;
+}
+
+.error-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(220, 53, 69, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-icon {
+    font-size: 1.5rem;
+    color: #dc3545;
+}
+
+.error-title {
+    font-family: var(--heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #c0392b;
+    letter-spacing: -0.01em;
+}
+
+.error-body {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.error-retry-btn {
+    margin-top: 0.4rem;
+    padding: 10px 24px;
+    font-size: 0.88rem;
+}

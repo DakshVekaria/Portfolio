@@ -4,7 +4,9 @@ function Footer(){
     return(
         <>
             <footer id='footer'>
-                <p>&copy; 2023 My Portfolio. All rights reserved.</p>
+                <span className='footer-dot'></span>
+                <p>© 2025 My Portfolio. All rights reserved.</p>
+                <span className='footer-dot'></span>
             </footer>
         </>
     )

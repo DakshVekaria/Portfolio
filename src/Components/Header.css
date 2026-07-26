@@ -1,37 +1,96 @@
-#navBar{
-    height: 75px;
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 25px;
+/* ── Navbar ── */
+#navBar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2.5rem;
+  height: 66px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #ece9f5;
+  box-shadow: 0 1px 16px rgba(105, 48, 195, 0.06);
 }
 
-#logo{
-    text-decoration: none;
-    font-size: 24px;
-    font-weight: bold;
-    color: rgb(41, 32, 139);
+/* ── Logo ── */
+#logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-decoration: none;
+  background: linear-gradient(135deg, #6930c3 0%, #0ea5e9 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: opacity 0.2s;
+  cursor: pointer;
 }
 
-#navLinks{
-    display: flex;
-    gap: 20px;
-    justify-content: space-between;
-    align-items: center;
+#logo::before {
+  content: '◈';
+  font-size: 1.1rem;
+  -webkit-text-fill-color: #6930c3;
+  opacity: 0.9;
 }
 
-.navBtn{
-    text-decoration: none;
-    color: rgb(54, 54, 54);
-    background-color: #afbeff75;
-    font-weight: bold;
-    transition: color 0.3s ease;
-    padding: 7px 15px;
-    border-radius: 14px;
+#logo:hover {
+  opacity: 0.8;
 }
 
-.navBtn:hover{
-    background-color: #afbeff99;
-    color: #000000;
+/* ── Nav links ── */
+#navLinks {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.navBtn {
+  position: relative;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #5b5b7a;
+  padding: 7px 16px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+.navBtn:hover {
+  color: #6930c3;
+  background: rgba(105, 48, 195, 0.07);
+  border-color: rgba(105, 48, 195, 0.15);
+}
+
+.navBtn.active {
+  color: #6930c3;
+  background: rgba(105, 48, 195, 0.1);
+  border-color: rgba(105, 48, 195, 0.22);
+  font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+  #navBar {
+    padding: 0 1rem;
+  }
+
+  .navBtn {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+
+  #logo {
+    font-size: 1.1rem;
+  }
 }

@@ -1,12 +1,107 @@
-#skill{
-    background-color: #afeaffa8;
-    padding: 20px;
+/* ── Skills section ── */
+#skill {
+  width: 100%;
+  max-width: 740px;
+  margin: 2.5rem auto;
+  padding: 3rem 2.5rem;
+  background: #ffffff;
+  border: 1px solid #ece9f5;
+  border-radius: 22px;
+  box-shadow: 0 4px 28px rgba(105,48,195,0.09), 0 1px 4px rgba(0,0,0,0.04);
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  transition: box-shadow 0.25s, border-color 0.25s;
 }
 
-#skillList{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
+#skill::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0ea5e9, #6930c3);
+  border-radius: 22px 22px 0 0;
+}
+
+#skill .skill-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #0ea5e9;
+  margin-bottom: 0.85rem;
+}
+
+#skill .skill-label::before {
+  content: '';
+  display: inline-block;
+  width: 16px; height: 2px;
+  background: linear-gradient(90deg, #0ea5e9, #6930c3);
+  border-radius: 2px;
+}
+
+#skill h2 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #111118;
+  margin-bottom: 0.6rem;
+}
+
+#skill > p {
+  font-size: 1rem;
+  color: #7070a0;
+  margin-bottom: 1.8rem;
+}
+
+/* Grid of skill pills */
+#skillList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #6930c3;
+  background: #ede9fe;
+  border: 1.5px solid rgba(105,48,195,0.2);
+  transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+  cursor: default;
+  letter-spacing: 0.01em;
+}
+
+.skill-tag::before {
+  content: '◆';
+  font-size: 0.5rem;
+  color: #6930c3;
+  opacity: 0.6;
+}
+
+.skill-tag:hover {
+  background: linear-gradient(135deg, #6930c3, #0ea5e9);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(105,48,195,0.3);
+  transform: translateY(-2px);
+}
+
+.skill-tag:hover::before {
+  color: rgba(255,255,255,0.7);
+}
+
+@media (max-width: 640px) {
+  #skill { padding: 2rem 1.5rem; margin: 1.5rem 1rem; }
+  .skill-tag { padding: 8px 16px; font-size: 0.82rem; }
 }
