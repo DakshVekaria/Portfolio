@@ -30,10 +30,6 @@ function Home() {
 
                 <div className='hero-divider'></div>
 
-                <div className='scroll-hint'>
-                    <span className='scroll-dot'></span>
-                    Scroll to explore
-                </div>
             </section>
 
             <Footer />

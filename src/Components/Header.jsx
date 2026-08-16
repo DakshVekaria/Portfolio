@@ -13,6 +13,7 @@ function Header(){
                     <NavLink to="/about"    className={({isActive}) => 'navBtn' + (isActive ? ' active' : '')}><span>About</span></NavLink>
                     <NavLink to="/projects" className={({isActive}) => 'navBtn' + (isActive ? ' active' : '')}><span>Projects</span></NavLink>
                     <NavLink to="/contact"  className={({isActive}) => 'navBtn' + (isActive ? ' active' : '')}><span>Contact</span></NavLink>
+                    <NavLink to="/task-manager"  className={({isActive}) => 'navBtn' + (isActive ? ' active' : '')}><span>Task Manager</span></NavLink>
                 </div>
             </div>
         </>
