@@ -12,7 +12,10 @@ function TaskManager() {
 
     const fetchTasks = () => {
         getTask()
-            .then(res => setTasks(res.data))
+            .then(res => {console.log('API response:', res.data); 
+                if (Array.isArray(res.data)) {
+                setTasks(res.data);
+            } })
             .catch(error => console.error('Error fetching tasks:', error));
     };
 
