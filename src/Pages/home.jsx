@@ -12,7 +12,7 @@ function Home() {
                 <div className='hero-badge'>Welcome to my Portfolio</div>
 
                 <h1 className='hero-title'>
-                    Building things for the <span className='accent-word'>web</span>
+                    <span className='accent-word'>Daksh Vekaria</span>
                 </h1>
 
                 <p className='hero-sub'>
