@@ -1,59 +1,661 @@
-.task-card{
-    display: flex;
-    justify-content: space-between;
-    border-radius: 10px;
-    background-color: #f2f2f2;
-    width: 230px;
-    padding: 8px;
-    margin: 0 0 10px 10px;
+/* ═══════════════════════════════════════════════════════════════════
+   DESIGN TOKENS
+   ═══════════════════════════════════════════════════════════════════ */
+:root {
+    --primary:         #6c63ff;
+    --primary-2:       #a78bfa;
+    --primary-dark:    #5a52e0;
+    --primary-ring:    rgba(108, 99, 255, 0.18);
+
+    --danger:          #e03e3e;
+    --danger-light:    #fde8e8;
+    --danger-border:   #f5c6cb;
+    --danger-dark:     #c0392b;
+
+    --surface:         #ffffff;
+    --surface-2:       #f8f8fc;
+    --border:          #e0ddf0;
+    --border-input:    #d9d9e8;
+    --text-primary:    #1e1b2e;
+    --text-secondary:  #4b4869;
+    --text-muted:      #9490a8;
+    --placeholder:     #b0aec8;
+
+    --radius-sm:       6px;
+    --radius:          10px;
+    --radius-lg:       16px;
+    --radius-card:     14px;
+    --shadow-card:     0 2px 12px rgba(108, 99, 255, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-hover:    0 6px 24px rgba(108, 99, 255, 0.14), 0 2px 6px rgba(0, 0, 0, 0.08);
+    --transition:      0.18s ease;
+    --accent-gradient: linear-gradient(180deg, var(--primary), var(--primary-2));
 }
 
-.task-input{
-    width: 200px;
-    padding: 5px;
-    margin: 5px 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
+/* ═══════════════════════════════════════════════════════════════════
+   PAGE SHELL
+   ═══════════════════════════════════════════════════════════════════ */
 
-.task-btn{
-    padding: 5px 10px;
-    margin: 5px 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.task-btn:hover{
-    background-color: #e0e0e0;
-    cursor: pointer;
-}
-
-.task-header{
+.task-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+    text-align: center;
+}
+
+.task-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 6px;
+}
+
+.task-header p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0;
 }
 
 .hero-divider {
     width: 100%;
     max-width: 740px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #e0ddf0, transparent);
-    margin: 2rem auto 2rem;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 2rem auto;
 }
 
-.task-list{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    list-style-type: none; 
-}
+/* ═══════════════════════════════════════════════════════════════════
+   SHARED CARD SHELL  (used by form card & task cards)
+   ═══════════════════════════════════════════════════════════════════ */
 
-.create-task-form{
+.create-task-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 0;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+/* ─── Form card ─────────────────────────────────────────────────── */
+
+.form-card {
+    width: 100%;
+    max-width: 720px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    padding: 28px 32px 32px;
+    box-sizing: border-box;
+}
+
+.form-card__heading {
+    margin: 0 0 22px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+/* ─── Form internals ─────────────────────────────────────────────── */
+
+.task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-label {
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.02em;
+}
+
+.form-input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 44px;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    background: var(--surface-2);
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius);
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-input::placeholder {
+    color: var(--placeholder);
+}
+
+.form-input:focus {
+    border-color: var(--primary);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px var(--primary-ring);
+}
+
+/* textarea overrides */
+.form-textarea {
+    height: auto;
+    min-height: 110px;
+    resize: vertical;
+    line-height: 1.55;
+}
+
+/* ─── Submit button ───────────────────────────────────────────────── */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+}
+
+.form-submit-btn {
+    height: 44px;
+    padding: 0 28px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+    letter-spacing: 0.01em;
+}
+
+.form-submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 99, 255, 0.38);
+}
+
+.form-submit-btn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(108, 99, 255, 0.3);
+}
+
+.form-submit-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   TASK LIST SECTION
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper (matches .ai-section width) ── */
+.tasklist-section {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto 3rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+/* ── Section heading row ── */
+.tasklist-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
+
+.tasklist-header__left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tasklist-heading {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.tasklist-count-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: var(--accent-gradient);
+    color: #fff;
+}
+
+.tasklist-subtitle {
+    margin: 0 0 18px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* ── Empty state ── */
+.tasklist-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 36px 24px;
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-lg);
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.tasklist-empty__icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.tasklist-empty__text {
+    margin: 0;
+    font-size: 0.92rem;
+}
+
+/* ── Entrance animation ── */
+@keyframes task-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── List & card ── */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.task-list li {
+    animation: task-fade-in 0.2s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .task-list li {
+        animation: none;
+    }
+}
+
+.task-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;                          /* accent bar butts up to the body */
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-card);
+    padding: 0;
+    overflow: hidden;                /* so the accent bar inherits the radius */
+    transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.task-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+}
+
+/* Purple accent bar on the left */
+.task-card__accent {
+    flex-shrink: 0;
+    width: 5px;
+    align-self: stretch;
+    background: var(--accent-gradient);
+    border-radius: var(--radius-card) 0 0 var(--radius-card);
+}
+
+/* Text area – takes up remaining width */
+.task-card__body {
+    flex: 1;
+    min-width: 0;
+    padding: 16px 20px;
+    overflow-wrap: anywhere;
+}
+
+.task-card__title {
+    margin: 0 0 5px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.task-card__description {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    white-space: pre-line;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+}
+
+/* Delete button area */
+.task-card__delete-btn {
+    flex-shrink: 0;
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 14px;
+    padding: 5px 11px;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--danger);
+    background: transparent;
+    border: 1.5px solid var(--danger);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.task-card__delete-btn:hover {
+    background: var(--danger);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(224, 62, 62, 0.28);
+}
+
+.task-card__delete-btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(224, 62, 62, 0.3);
+}
+
+.task-card__delete-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   AI ASSISTANT SECTION  (all "ai-" classes preserved unchanged)
+   ═══════════════════════════════════════════════════════════════════ */
+
+.ai-section {
+    max-width: 700px;
+    width: 100%;
+    margin: 0 auto 2rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.ai-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+
+.ai-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.ai-title {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-primary);
+}
+
+/* ── Chat area ── */
+.ai-chat-area {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 12px;          /* generous top/bottom so first/last bubbles aren’t clipped */
+    max-height: 320px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    scroll-behavior: smooth;
+}
+
+.ai-empty-state {
+    margin: auto;
+    color: var(--placeholder);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* ── Bubbles ── */
+.ai-bubble {
+    flex-shrink: 0;              /* never collapse – prevents top/bottom clipping */
+    max-width: 80%;
+    padding: 0.55rem 0.9rem;
+    border-radius: 16px;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    white-space: pre-line;
+    word-break: break-word;
+}
+
+.ai-bubble--user {
+    align-self: flex-end;
+    background: var(--primary);
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+
+.ai-bubble--ai {
+    align-self: flex-start;
+    background: #e8e8f0;
+    color: #222;
+    border-bottom-left-radius: 4px;
+}
+
+.ai-bubble--error {
+    align-self: flex-start;
+    background: var(--danger-light);
+    color: var(--danger-dark);
+    border: 1px solid var(--danger-border);
+    border-bottom-left-radius: 4px;
+}
+
+.ai-bubble--thinking {
+    opacity: 0.7;
+    font-style: italic;
+    animation: ai-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes ai-pulse {
+    0%, 100% { opacity: 0.5; }
+    50%       { opacity: 0.9; }
+}
+
+/* ── Suggestion card ── */
+.ai-suggestion-card {
+    background: var(--surface);
+    border: 1px solid #d1cef0;
+    border-radius: var(--radius);
+    padding: 0.9rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-self: stretch;
+}
+
+.ai-suggestion-label {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.ai-suggestion-textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    padding: 0.5rem 0.7rem;
+    border: 1px solid var(--border-input);
+    border-radius: var(--radius-sm);
+    resize: vertical;
+    white-space: pre-line;
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.ai-suggestion-textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-ring);
+}
+
+.ai-suggestion-actions {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+/* ── AI buttons ── */
+.ai-btn {
+    padding: 0.45rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    font-size: 0.88rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background var(--transition), box-shadow var(--transition), opacity var(--transition);
+}
+
+.ai-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.ai-btn--primary {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+.ai-btn--primary:hover:not(:disabled) {
+    background: var(--primary-dark);
+    box-shadow: 0 2px 8px rgba(108, 99, 255, 0.35);
+}
+
+.ai-btn--secondary {
+    background: #f0f0f0;
+    color: #444;
+    border-color: #ddd;
+}
+
+.ai-btn--secondary:hover:not(:disabled) {
+    background: #e0e0e0;
+}
+
+.ai-btn--generate {
+    background: linear-gradient(135deg, var(--primary), var(--primary-2));
+    color: #fff;
+    border: none;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.55rem 1.3rem;
+}
+
+.ai-btn--generate:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--primary-dark), #9370e8);
+    box-shadow: 0 3px 12px rgba(108, 99, 255, 0.4);
+}
+
+/* ── Controls row ── */
+.ai-controls {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* ── Disclaimer ── */
+.ai-disclaimer {
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+    .form-card {
+        padding: 20px 16px 24px;
+        border-radius: var(--radius);
+    }
+
+    .form-submit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .form-actions {
+        justify-content: stretch;
+    }
+
+    /* Task list section */
+    .tasklist-section {
+        padding: 0 16px;
+    }
+
+    /* On small screens stack delete below text */
+    .task-card {
+        flex-wrap: wrap;
+    }
+
+    .task-card__body {
+        /* let it fill the full card width before the button wraps below */
+        width: 100%;
+    }
+
+    .task-card__delete-btn {
+        margin: 0 0 12px 14px;   /* indent to clear the accent bar */
+    }
+
+    .create-task-form {
+        padding: 0 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ai-chat-area {
+        max-height: 240px;
+    }
+
+    .ai-bubble {
+        max-width: 95%;
+    }
+
+    .ai-section {
+        padding: 0 0.5rem;
+    }
 }
